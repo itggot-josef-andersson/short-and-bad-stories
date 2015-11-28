@@ -96,6 +96,11 @@ get '/res/:key' do |key|
   get_file_contents path
 end
 
+get '/favicon.ico' do
+  headers({'Content-Type' => 'image/x-icon'})
+  get_file_contents './favicon.ico'
+end
+
 get // do
   @dir = request.path_info
   erb :'404'

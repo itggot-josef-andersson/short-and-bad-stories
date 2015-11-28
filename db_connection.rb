@@ -8,17 +8,24 @@ class DBConnection
 
   def initialize
     @db = SQLite3::Database.new 'stories.sqlite'
+    puts "\nCreating table 'stories' if not exists\n"
+    db.execute 'CREATE TABLE IF NOT EXISTS "stories" (
+      `id`	  INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+      `title`	TEXT NOT NULL,
+      `date`	TEXT DEFAULT CURRENT_TIMESTAMP,
+      `hash`	TEXT NOT NULL UNIQUE
+    )'
   end
 
   def upload_story(title, text)
-    hash = Digest::SHA256.hexdigest("#{title}#{text}")
+    hash = Digest::SHA256.hexdigest("#{title}#{text}").to_s
     if db.execute('INSERT INTO stories (title, hash, date) VALUES (?, ?, ?)', title, hash, Time.now.asctime.to_s)
       f = File.new("./stories/#{hash}", 'w')
       f.write text
       f.close
       hash
     else
-      'SQLWASRIP'
+      'SQLError'
     end
   end
 
@@ -35,16 +42,16 @@ class DBConnection
   end
 
   def get_story_data_from_hash(hash)
-    res = db.execute('SELECT title, date FROM stories WHERE hash = ?', hash)
-    if res
-      row = res[0]
-      return StoryData.new(row[0], row[1], hash)
+    res = db.execute('SELECT title, date FROM stories WHERE hash LIKE ?', hash)
+    if res && res.length
+      res = res[0]
+      return StoryData.new(res[0], res[1], hash)
     end
     nil
   end
 
   def story_exists(hash)
-    db.execute('SELECT * FROM stories WHERE hash = ?', hash).length > 0
+    db.execute('SELECT * FROM stories WHERE hash LIKE ?', hash).length > 0
   end
 
 end
