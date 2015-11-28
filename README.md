@@ -7,5 +7,5 @@ SBS is a website where one can upload a piece of text anonumously and share the 
 ###### Features
 * Uses Sinatra.
 * Uses SQLite3 to store data.
-* Uses Digest to hash stories. (NOTE: hashes are used in place of uids)
+* Uses Digest to hash uploads. (NOTE: hashes are used in place of uids)
 * Pages are serverd using ERB.
