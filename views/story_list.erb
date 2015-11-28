@@ -1,0 +1,18 @@
+<h2><%= @title %></h2>
+<table>
+    <span>(<%= @stories.length %> stories in database.)</span>
+    <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th class="disposable">Size</th>
+        <th class="disposable">Hash</th>
+    </tr>
+    <% @stories.each do |data| %>
+        <tr>
+            <td><a href="/read/<%= data.hash %>" class="brightish"><%= data.trim_title? %></a></td>
+            <td><%= data.date %></td>
+            <td class="disposable"><%= data.format_file_size? %></td>
+            <td class="disposable"><%= data.trim_hash? %></td>
+        </tr>
+    <% end %>
+</table>

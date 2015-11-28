@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="application-name" content="short-and-bad-stories">
+    <meta name="author" content="Josef A Engman">
+    <meta name="creator" content="Josef A Engman">
+    <meta name="robots" content="index,noarchive,noimageindex,nocache,noydir">
+    <meta name="description" content="Upload and share your absolute worst and least interesting stories anonymously!">
+    <meta name="keywords" content="story,upload,share,anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="default-style" content="global-stylesheet">
+    <title>Short &amp; bad stories!</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link title="global-stylesheet" rel="stylesheet" href="/res/style">
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Welcome to shortandbadstories.net!</h1>
+        <nav>
+          <ul class="nav-header">
+            <li class="nav-header"><a href="/">Home</a></li>
+            <li class="nav-header"><a href="/latest">Latest stories</a></li>
+            <li class="nav-header"><a href="/share">Share a story</a></li>
+          </ul>
+        </nav>
+      </header>
+      <div class="split-bar"></div>
+      <section>
+        <%= yield %>
+      </section>
+      <div class="split-bar"></div>
+      <footer>
+        <span>Copyright &copy; 2016 <a href="http://josefadventures.org/">josefadventures.org</a></span>
+      </footer>
+    </div>
+  </body>
+</html>
